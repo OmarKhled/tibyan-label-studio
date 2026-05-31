@@ -44,7 +44,11 @@ class _Registry {
 
   perRegionViews: Record<string, any> = {};
 
-  addTag(tag: string | number, model: { name: string | number }, view: JSX.Element) {
+  addTag(
+    tag: string | number,
+    model: { name: string | number },
+    view: JSX.Element,
+  ) {
     this.tags.push(tag);
     this.models[tag] = model;
     this.views[tag] = view;
@@ -106,7 +110,9 @@ class _Registry {
     if (!model) {
       const models = Object.keys(this.tools);
 
-      throw new Error(`No model registered for tool: ${name}\nAvailable models:\n\t${models.join("\n\t")}`);
+      throw new Error(
+        `No model registered for tool: ${name}\nAvailable models:\n\t${models.join("\n\t")}`,
+      );
     }
 
     return model;
@@ -123,7 +129,9 @@ class _Registry {
     if (!model) {
       const models = Object.keys(this.models);
 
-      throw new ConfigurationError(`No model registered for tag: ${tag}\nAvailable models:\n\t${models.join("\n\t")}`);
+      throw new ConfigurationError(
+        `No model registered for tag: ${tag}\nAvailable models:\n\t${models.join("\n\t")}`,
+      );
     }
 
     return model;
@@ -146,7 +154,11 @@ class _Registry {
       this.addObjectType(definition.model);
     }
     if (definition.region) {
-      this.addRegionType(definition.region, definition.model.name, definition.detector);
+      this.addRegionType(
+        definition.region,
+        definition.model.name,
+        definition.detector,
+      );
     }
     this.customTags.push(definition);
   }

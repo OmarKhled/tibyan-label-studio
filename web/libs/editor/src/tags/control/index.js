@@ -5,6 +5,7 @@ import { PairwiseModel } from "./Pairwise";
 import { RankerModel } from "./Ranker";
 import { RatingModel } from "./Rating";
 import { ShortcutModel } from "./Shortcut";
+import { SortableChipsModel } from "./SortableChips/SortableChips";
 import { TaxonomyModel } from "./Taxonomy/Taxonomy";
 import { TextAreaModel } from "./TextArea/TextArea";
 
@@ -44,6 +45,7 @@ export {
   RankerModel,
   RatingModel,
   ShortcutModel,
+  SortableChipsModel,
   TaxonomyModel,
   TextAreaModel,
   HyperTextLabelsModel,

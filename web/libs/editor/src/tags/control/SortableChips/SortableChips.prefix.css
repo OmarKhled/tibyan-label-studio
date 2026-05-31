@@ -1,0 +1,259 @@
+.sortable-chips {
+  position: relative;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 16px 16px;
+  border-radius: 8px;
+  background: var(--color-neutral-emphasis-subtle);
+  border: 1px solid var(--color-neutral-border-subtle);
+  user-select: none;
+
+  &_hidden {
+    display: none;
+  }
+
+  &__row {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    min-height: 36px;
+    padding-top: 24px;
+  }
+
+  &__chip {
+    /* ── base (normal, unselected, non-duplicated) ── */
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    min-height: 28px;
+    border-radius: 999px;
+    background: var(--color-neutral-background);
+    border: 1px solid var(--color-neutral-border);
+    color: var(--color-neutral-content);
+    font-size: 14px;
+    line-height: 1.2;
+    cursor: pointer;
+    transition:
+      background 0.1s ease,
+      border-color 0.1s ease,
+      color 0.1s ease,
+      box-shadow 0.1s ease;
+    touch-action: none;
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary-border-subtle);
+      outline-offset: 2px;
+    }
+
+    /* ── normal chip on hover → lightest blueberry ──
+       Scoped with :not() so this rule cannot apply to selected or duplicated
+       chips, even briefly during a cascade tie. */
+    &:hover:not(&_selected):not(&_repetition) {
+      background: var(--color-accent-blueberry-subtler);
+      border-color: var(--color-accent-blueberry-subtle);
+      color: var(--color-accent-blueberry-dark);
+    }
+
+    /* ── duplicated, unselected → grape ── */
+    &_repetition:not(&_selected) {
+      background: var(--color-primary-emphasis);
+      border-color: var(--color-primary-border);
+      color: var(--color-primary-content);
+    }
+
+    /* ── duplicated, unselected, hover → same grape (no change) ── */
+    &_repetition:not(&_selected):hover {
+      background: var(--color-primary-emphasis);
+      border-color: var(--color-primary-border);
+      color: var(--color-primary-content);
+    }
+
+    /* ── selected (regardless of duplicated) → medium blueberry ── */
+    &_selected {
+      background: var(--color-blueberry-300);
+      border-color: var(--color-accent-blueberry-base);
+      color: var(--color-accent-blueberry-dark);
+    }
+
+    /* ── selected, hover → same background, darker border ── */
+    &_selected:hover {
+      background: var(--color-blueberry-300);
+      border-color: var(--color-accent-blueberry-bold);
+      color: var(--color-accent-blueberry-dark);
+    }
+
+    /* ── selected + duplicated → darker grape (overrides _selected via higher specificity) ── */
+    &_repetition&_selected {
+      background: var(--color-grape-200);
+      border-color: var(--color-primary-border);
+      color: var(--color-primary-content);
+    }
+
+    /* ── selected + duplicated, hover → same background, darker border ── */
+    &_repetition&_selected:hover {
+      background: var(--color-grape-300);
+      border-color: var(--color-grape-800);
+      color: var(--color-primary-content);
+    }
+
+    /* ── while reorder-dragging ── */
+    &_dragging {
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+      opacity: 0.9;
+      z-index: 10;
+    }
+  }
+
+  &__selection-outline {
+    position: absolute;
+    pointer-events: none;
+    border: 1.5px dashed var(--color-primary-border);
+    border-radius: 16px;
+    box-sizing: border-box;
+    z-index: 3;
+  }
+
+  &__actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 4px;
+
+    &_floating {
+      position: absolute;
+      transform: translate(-50%, calc(-100% - 8px));
+      z-index: 5;
+      padding: 4px;
+      border-radius: 8px;
+      background: var(--color-neutral-background);
+      border: 1px solid var(--color-neutral-border);
+      box-shadow: 0 4px 14px rgb(0 0 0 / 0.12);
+      pointer-events: auto;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -5px;
+        width: 8px;
+        height: 8px;
+        background: var(--color-neutral-background);
+        border-right: 1px solid var(--color-neutral-border);
+        border-bottom: 1px solid var(--color-neutral-border);
+        transform: translate(-50%, 0) rotate(45deg);
+      }
+    }
+  }
+
+  &__action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: var(--color-neutral-background);
+    border: 1px solid var(--color-neutral-border);
+    color: var(--color-neutral-icon);
+    cursor: pointer;
+    padding: 0;
+
+    &:hover {
+      background: var(--color-neutral-surface-hover);
+      color: var(--color-neutral-content);
+    }
+
+    &:active {
+      background: var(--color-neutral-surface-active);
+    }
+
+    &_delete:hover {
+      color: var(--color-negative-content, var(--color-neutral-content));
+      border-color: var(
+        --color-negative-border,
+        var(--color-neutral-border-bold)
+      );
+    }
+  }
+
+  &__legend {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 4;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--color-neutral-content-subtle);
+    pointer-events: none;
+  }
+
+  &[dir="rtl"] &__legend {
+    left: auto;
+    right: 8px;
+  }
+
+  &__legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__legend-swatch {
+    display: inline-block;
+    width: 14px;
+    height: 10px;
+    border-radius: 999px;
+    box-sizing: border-box;
+
+    &_normal {
+      background: var(--color-neutral-background);
+      border: 1px solid var(--color-neutral-border);
+    }
+
+    &_duplicate {
+      background: var(--color-primary-emphasis);
+      border: 1px solid var(--color-primary-border);
+    }
+  }
+
+  &__reset {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    /* Sit above the chip row so the row's padding-top area doesn't steal clicks
+       from the bottom half of this button. */
+    z-index: 4;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--color-neutral-content-subtle);
+    font-size: 12px;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--color-neutral-surface-hover);
+      border-color: var(--color-neutral-border-subtle);
+      color: var(--color-neutral-content);
+    }
+  }
+
+  &[dir="rtl"] &__reset {
+    right: auto;
+    left: 8px;
+  }
+
+  &_readonly {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+}

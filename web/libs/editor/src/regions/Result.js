@@ -39,6 +39,7 @@ const resultTypes = [
   "videovector",
   "videovectorlabels",
   "ranker",
+  "sortablechips",
 ];
 
 const resultValues = {
@@ -68,6 +69,7 @@ const resultValues = {
   videovectorlabels: types.maybe(types.array(types.string)),
   taxonomy: types.frozen(), // array of arrays of strings
   sequence: types.frozen(),
+  sortablechips: types.frozen(), // array of { value, display, sourceIndex, ...extras }
 };
 
 const Result = types

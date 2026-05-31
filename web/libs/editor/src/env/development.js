@@ -3,13 +3,14 @@
 import External from "../core/External";
 import Messages from "../utils/messages";
 import { ClassificationMixed } from "../examples/classification_mixed";
+import { SortableChipsExample } from "../examples/sortablechips";
 
 /**
  * Custom Data
  */
 // import { AllTypes } from "../examples/all_types";
 
-const data = ClassificationMixed;
+const data = SortableChipsExample;
 
 function getData(task) {
   if (task && task.data) {

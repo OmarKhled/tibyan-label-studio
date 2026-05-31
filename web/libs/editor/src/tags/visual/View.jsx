@@ -118,6 +118,7 @@ const Model = types
       "dialog",
       "textarea",
       "pairwise",
+      "sortablechips",
       "style",
       "relations",
       "filter",

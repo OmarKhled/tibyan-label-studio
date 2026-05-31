@@ -1,0 +1,67 @@
+<View>
+  <Style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&amp;display=swap');
+
+    .root * {
+      font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+      direction: rtl; 
+    }
+
+    .bold {
+      font-weight: 700 !important;
+    }
+
+    .cols {
+      display: flex;
+      gap: 32px;
+
+      width: 100%;
+    }
+
+    .flex1 {
+      width: max-content;
+      min-width: 350px;
+    }
+
+    .cols {
+      flex-wrap: wrap;
+    }
+  </Style>
+
+  <View className="root">
+    <Header value="الاية الاصلية"  />
+    <Text name="ayah_display" value="$ayah_text" />
+    <SortableChips
+      name="transcript"
+      toName="ayah_display"
+      source="$ayah_words"
+      default="$default_sequence"
+      direction="rtl"
+      required="true"
+    />
+
+
+    <View className="cols">
+      <!-- <View className="flex1">
+        <Text name="status_label" value="حالة التسجيل" className="bold" />
+        <Choices name="status" toName="status_label" choice="single">
+          <Choice value="ليس بها مشاكل" />
+          <Choice value="الكلمات بها تكرارات" />
+          <Choice value="لا يمكن تمييز الكلام" />
+        </Choices>
+      </View> -->
+    
+
+      <View className="flex1">
+        <Text name="quality_label" value="جودة التسجيل" className="bold" />
+        <Choices name="quality" toName="quality_label" choice="single">
+          <Choice value="الصوت نظيف" />
+          <Choice value="هناك ضوضاء فى الخلفية" />
+          <Choice value="لا يمكن تمييز الكلام" />
+          <Choice value="الصوت يحتوى على اية مختلفة" />
+          <!-- <Choice value="هناك كلام خارج السياق" /> -->
+        </Choices>
+      </View>
+    </View>
+  </View>
+</View>

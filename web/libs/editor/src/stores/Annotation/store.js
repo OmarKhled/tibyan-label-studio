@@ -280,6 +280,7 @@ const AnnotationStoreModel = types
     }
 
     function initRoot(config) {
+      console.log({config})
       if (self.root) return;
 
       if (!config) {
@@ -291,6 +292,8 @@ const AnnotationStoreModel = types
 
       try {
         rootModel = Tree.treeToModel(config, self.store);
+
+        console.log("rootModel", rootModel);
       } catch (e) {
         console.error(e);
         return showError(e);
@@ -298,6 +301,8 @@ const AnnotationStoreModel = types
       const modelClass = Registry.getModelByTag(rootModel.type);
       // hacky way to get all the available object tag names
       const objectTypes = Registry.objectTypes().map((type) => type.name.replace("Model", "").toLowerCase());
+
+      console.log({objectTypes});
       const objects = [];
 
       self.validate(VALIDATORS.CONFIG, rootModel);

@@ -53,6 +53,7 @@ const Model = types.model({
     "dialog",
     "textarea",
     "pairwise",
+    "sortablechips",
     "style",
     "label",
     "relations",

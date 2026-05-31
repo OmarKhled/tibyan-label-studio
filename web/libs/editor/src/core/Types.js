@@ -8,6 +8,7 @@ function _mixedArray(fn) {
 }
 
 function _oneOf(lookup, err) {
+  console.log("lookup", lookup);
   return (arr) =>
     types.union({
       dispatcher: (sn) => {

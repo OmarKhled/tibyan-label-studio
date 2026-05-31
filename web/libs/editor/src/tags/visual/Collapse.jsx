@@ -74,6 +74,7 @@ const PanelModel = types
       "dialog",
       "textarea",
       "pairwise",
+      "sortablechips",
       "style",
       "label",
       "relations",
